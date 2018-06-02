@@ -19,7 +19,7 @@ function preloadFormData() {
 
   var form = FormApp.getActiveForm();
   
-  form.setTitle('Hello ' + name + ", please update your status");
+  form.setTitle('Hi ' + name + ", please update your status");
 }
 
 function onOpen(e) {
