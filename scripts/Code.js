@@ -1,14 +1,14 @@
 function getName() {
   var email = Session.getActiveUser().getEmail();
   var contact = ContactsApp.getContact(email);
- 
   var name = contact.getGivenName();
-  Logger.log('Name is' + name);
 
+  Logger.log('Name is' + name);
   return name;
 }
 
 function preloadFormData() {
+  var form = FormApp.getActiveForm();
   var name = getName();
   
   if (!name) {
@@ -17,8 +17,6 @@ function preloadFormData() {
     Logger.log('Unable to load name');
   }
 
-  var form = FormApp.getActiveForm();
-  
   form.setTitle('Hello ' + name + ", please update your status");
 }
 
@@ -64,6 +62,7 @@ function onFormSubmit(e) {
 
   // update cells
   // assumes master spreadsheet id will not change! This is the id of 'Copy of In/out Board'
-  SpreadsheetApp.openById('1q92rCbdK0JHiQ_2dbBEp0uBcIVNxuzqzqw5fBYY0Ixs').getRange(statusCell).setValue(status);
-  SpreadsheetApp.openById('1q92rCbdK0JHiQ_2dbBEp0uBcIVNxuzqzqw5fBYY0Ixs').getRange(notesCell).setValue(notes);
+  var spreadsheet = SpreadsheetApp.openById('1q92rCbdK0JHiQ_2dbBEp0uBcIVNxuzqzqw5fBYY0Ixs')
+  spreadsheet.getRange(statusCell).setValue(status);
+  spreadsheet.getRange(notesCell).setValue(notes);
 }
