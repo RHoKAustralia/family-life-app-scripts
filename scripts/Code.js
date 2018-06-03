@@ -1,3 +1,5 @@
+var masterForm = '1q92rCbdK0JHiQ_2dbBEp0uBcIVNxuzqzqw5fBYY0Ixs';
+
 function getName() {
   var email = Session.getActiveUser().getEmail();
   var contact = ContactsApp.getContact(email);
@@ -30,7 +32,7 @@ function onOpen(e) {
 // spreadsheet id must not change
 function matchUserToRow() {
   var email = Session.getActiveUser().getEmail();
-  var sheet = SpreadsheetApp.openById('1q92rCbdK0JHiQ_2dbBEp0uBcIVNxuzqzqw5fBYY0Ixs'); // id of 'Copy of In/out Board'
+  var sheet = SpreadsheetApp.openById(masterForm); // id of 'Copy of In/out Board'
   var data = sheet.getDataRange().getValues();
   for (var i = 0; i < data.length; i++) {
     if (data[i][2] == email) { // [0] is column C
@@ -62,7 +64,7 @@ function onFormSubmit(e) {
 
   // update cells
   // assumes master spreadsheet id will not change! This is the id of 'Copy of In/out Board'
-  var spreadsheet = SpreadsheetApp.openById('1q92rCbdK0JHiQ_2dbBEp0uBcIVNxuzqzqw5fBYY0Ixs')
+  var spreadsheet = SpreadsheetApp.openById(masterForm)
   spreadsheet.getRange(statusCell).setValue(status);
   spreadsheet.getRange(notesCell).setValue(notes);
 
